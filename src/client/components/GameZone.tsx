@@ -49,9 +49,12 @@ class GameZone extends React.PureComponent<GameZoneProps, GameZoneState> {
     return visible && (
       <div className={classnames('game-container')}>
         <h3 style={styles}>Karaoke</h3>
-        {this.state.showKaraoke && <video width="560" height="315" controls autoPlay={true}>
-          <source src="/res/gilber-montagne-les-sunlights-des-tropiques.mp4" type="video/mp4"></source>
-        </video>}
+        {this.state.showKaraoke && <div>
+          <video width="560" height="315" controls autoPlay={true}>
+            <source src="/res/gilber-montagne-les-sunlights-des-tropiques.mp4" type="video/mp4"></source>
+          </video>
+          <img className={classnames('disco-ball')} src="/res/disco-ball.gif" />
+        </div>}
         {!this.state.showKaraoke && <button onClick={() => this.startKaraoke()}>Start singing</button>}
       </div>
     )
