@@ -22,8 +22,8 @@ rules:
       functions: always-multiline
 
   semi:
-    - warn
-    - never
+    - 2
+    - always
   quotes:
     - warn
     - single

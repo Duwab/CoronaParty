@@ -9,6 +9,7 @@ import { Message as MessageType } from '../actions/PeerActions'
 import { removeStream } from '../actions/StreamActions'
 import * as constants from '../constants'
 import Chat from './Chat'
+import GameZone from './GameZone'
 import { Media } from './Media'
 import Notifications from './Notifications'
 import { Side } from './Side'
@@ -92,6 +93,9 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
     return (
       <div className="app">
+
+        <GameZone />
+
         <Side align='flex-end' left zIndex={2}>
           <Toolbar
             chatVisible={this.state.chatVisible}

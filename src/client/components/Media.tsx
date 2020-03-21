@@ -52,6 +52,10 @@ export const MediaForm = React.memo(function MediaForm(props: MediaProps) {
 
   async function onSave(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    return joinCall()
+  }
+
+  async function joinCall() {
     const { audio, video } = props
     try {
       await props.getMediaStream({ audio, video })

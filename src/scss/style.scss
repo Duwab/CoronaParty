@@ -11,6 +11,10 @@ html {
   height: 100%;
 }
 
+body, #container, .app {
+  height: 100%;
+}
+
 html, body {
   z-index: -99;
 }
@@ -20,8 +24,8 @@ body {
   color: $color-fg;
   margin: 0;
   font-family: $font-sans-serif;
-  min-height: 100%;
-  padding-bottom: 3rem;
+  //min-height: 100%;
+  //padding-bottom: 3rem;
   position: relative;
 }
 
@@ -161,6 +165,7 @@ body.call {
 
 .app {
   @import '_alert';
+  @import '_games';
   @import '_notification';
   @import '_video';
   @import '_chat';
