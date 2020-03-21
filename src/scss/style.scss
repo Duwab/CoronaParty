@@ -20,7 +20,7 @@ html, body {
 }
 
 body {
-  background-color: $color-bg;
+  background-color: $color-virus;
   color: $color-fg;
   margin: 0;
   font-family: $font-sans-serif;
@@ -39,8 +39,8 @@ footer {
 }
 
 body.call {
-  background-image: url('../res/peer-calls.svg');
-  background-size: 200px;
+  background-image: url('../res/virus.png');
+  background-size: 100px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-blend-mode: soft-light;

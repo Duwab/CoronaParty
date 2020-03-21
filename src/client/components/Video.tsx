@@ -19,55 +19,62 @@ export interface VideoProps {
 }
 
 export default class Video extends React.PureComponent<VideoProps> {
-  videoRef = React.createRef<HTMLVideoElement>()
-  timeout?: number
+  videoRef = React.createRef<HTMLVideoElement>();
+  timeout?: number;
 
   static defaultProps = {
     muted: false,
     mirrored: false,
-  }
+  };
+
   handleClick: ReactEventHandler<HTMLVideoElement> = e => {
-    const { onClick, userId } = this.props
+    const {onClick, userId} = this.props;
     if (this.timeout) {
       // if the timeout was cancelled, execute click
-      this.props.play()
+      this.props.play();
       onClick(userId)
     }
     this.timeout = undefined
-  }
+  };
+
   handleMouseDown: ReactEventHandler<HTMLVideoElement> = e => {
-    clearTimeout(this.timeout)
+    clearTimeout(this.timeout);
     this.timeout = window.setTimeout(this.toggleCover, 300)
-  }
+  };
+
   handleMouseUp: ReactEventHandler<HTMLVideoElement> = e => {
-    clearTimeout(this.timeout)
-  }
+    clearTimeout(this.timeout);
+  };
+
   toggleCover = () => {
     this.timeout = undefined
     const v = this.videoRef.current
     if (v) {
       v.style.objectFit = v.style.objectFit ? '' : 'cover'
     }
-  }
-  componentDidMount () {
+  };
+
+  componentDidMount() {
     this.componentDidUpdate()
   }
-  componentDidUpdate () {
-    const { stream } = this.props
-    const video = this.videoRef.current!
-    const mediaStream = stream && stream.stream || null
-    const url = stream && stream.url
+
+  componentDidUpdate() {
+    const {stream} = this.props;
+    const video = this.videoRef.current!;
+    const mediaStream = stream && stream.stream || null;
+    const url = stream && stream.url;
     if ('srcObject' in video as unknown) {
       if (video.srcObject !== mediaStream) {
         video.srcObject = mediaStream
       }
     } else if (video.src !== url) {
-      video.src = url || ''
+      video.src = url || '';
     }
   }
-  render () {
-    const { active, mirrored, muted, userId } = this.props
-    const className = classnames('video-container', { active, mirrored })
+
+  render() {
+    const {active, mirrored, muted, userId} = this.props;
+    const className = classnames('video-container', {active, mirrored});
     return (
       <div className={className}>
         <video
@@ -89,6 +96,6 @@ export default class Video extends React.PureComponent<VideoProps> {
           localUser={this.props.localUser}
         />
       </div>
-    )
+    );
   }
 }
