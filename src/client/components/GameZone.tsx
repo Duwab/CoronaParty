@@ -1,8 +1,11 @@
-import classnames from 'classnames'
-import React, { CSSProperties } from 'react'
+import classnames from 'classnames';
+import React, { RefObject } from 'react';
 import { connect } from 'react-redux';
 import { State } from '../store';
 import { ME, STREAM_TYPE_CAMERA } from '../constants';
+import Karaoke  from './games/Karaoke';
+import Example  from './games/Example';
+import Select from 'react-select';
 
 export interface GameZoneProps {
   media: any
@@ -10,12 +13,13 @@ export interface GameZoneProps {
 }
 
 export interface GameZoneState {
-  showKaraoke: boolean
+  selectedGame: string
 }
 
-const styles: CSSProperties = {
-  textAlign: "center"
-};
+interface SelectOption {
+  value: string;
+  label: string;
+}
 
 function mapStateToProps(state: State): GameZoneProps {
   const localStream = state.streams[ME];
@@ -24,39 +28,46 @@ function mapStateToProps(state: State): GameZoneProps {
   return {
     media: state.media,
     visible,
-  }
+  };
 }
 
-const c = connect(mapStateToProps)
+const c = connect(mapStateToProps);
 
 class GameZone extends React.PureComponent<GameZoneProps, GameZoneState> {
 
+  componentRef: RefObject<any> = React.createRef<any>();
+
   constructor(props: any) {
     super(props);
-    this.state = {showKaraoke: false};
+    this.state = {
+      selectedGame: 'none',
+    };
   }
 
-  startKaraoke() {
-    console.log("let's start !");
-    this.setState({showKaraoke: true});
+  onChange(newValue: any) {
+    this.setState({ selectedGame: newValue.value});
+    const selector = this.componentRef.current;
+    selector && selector.blur();
   }
 
   render() {
     const {visible} = this.props;
 
+    const options: SelectOption[] = [
+      { value: 'karaoke', label: 'Karaoke' },
+      { value: 'keyboard', label: 'Keyboard' },
+      { value: 'none', label: 'None' },
+    ];
+
     return visible && (
       <div className={classnames('game-container')}>
-        <h3 style={styles}>Karaoke</h3>
-        {this.state.showKaraoke && <div>
-          <video width="560" height="315" controls autoPlay={true}>
-            <source src="/res/gilber-montagne-les-sunlights-des-tropiques.mp4" type="video/mp4"></source>
-          </video>
-          <img className={classnames('disco-ball')} src="/res/disco-ball.gif" />
-        </div>}
-        {!this.state.showKaraoke && <button onClick={() => this.startKaraoke()}>Start singing</button>}
+        <Select ref={this.componentRef} defaultValue={options[2]} className={classnames('game-selector')} options={options} onChange={(v: any) => this.onChange(v)}/>
+        {this.state.selectedGame && <h3>{this.state.selectedGame}</h3>}
+        {this.state.selectedGame === 'karaoke' && <Karaoke />}
+        {this.state.selectedGame === 'keyboard' && <Example />}
       </div>
-    )
+    );
   }
 }
 
-export default c(GameZone)
+export default c(GameZone);
