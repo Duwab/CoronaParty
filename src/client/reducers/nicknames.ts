@@ -11,7 +11,7 @@ const defaultState: Nicknames = {
 
 export default function nicknames(
   state = defaultState,
-    action: NicknameActions | RemovePeerAction,
+  action: NicknameActions | RemovePeerAction,
 ) {
   switch (action.type) {
     case PEER_REMOVE:
@@ -24,4 +24,25 @@ export default function nicknames(
     default:
       return state
   }
+}
+
+
+const randomName = [
+  "John Doe",
+  "Smith",
+  "Sponge Bob",
+  "Rambo",
+  "Luke",
+  "Leia",
+  "Xena",
+  "Madonna"
+];
+
+const getRandomName = () => {
+  const i = Math.floor(Math.random() * randomName.length);
+  return randomName[i];
+};
+
+if (localStorage && !localStorage.nickname) {
+  localStorage.nickname = getRandomName();
 }

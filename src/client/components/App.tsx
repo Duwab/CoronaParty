@@ -69,8 +69,8 @@ export default class App extends React.PureComponent<AppProps, AppState> {
   onHangup = () => {
     const localStreams = this.getLocalStreams();
     forEach(localStreams, s => {
-      // this.props.removeStream(constants.ME, s.stream);
-      this.props.refreshPeersDispatch();
+      this.props.removeStream(constants.ME, s.stream);
+      // this.props.refreshPeersDispatch();
     });
   };
   getLocalStreams() {
