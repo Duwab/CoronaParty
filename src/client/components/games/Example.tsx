@@ -1,8 +1,8 @@
 import classnames from 'classnames'
-import React, { CSSProperties, Ref, RefObject } from 'react'
+import React, { CSSProperties, Ref, RefObject } from 'react';
 import { connect } from 'react-redux';
 import { State } from '../../store';
-import { PlayerCoordinates, PositionManager } from './lib/movement/MoveHandler';
+import { PlayerCoordinates, PositionManager } from './common/movement/MoveHandler';
 
 export interface GameExampleProps {
 }
