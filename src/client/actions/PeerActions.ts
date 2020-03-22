@@ -82,13 +82,22 @@ class PeerHandler {
     // Listen to mute event to know when a track was removed
     // https://github.com/feross/simple-peer/issues/512
     track.onmute = () => {
-      console.log('on mute');
+      console.log('on mute => do nothing');
       debug('peer: %s, track muted', userId)
-      dispatch(StreamActions.removeTrack({
-        userId,
-        stream,
-        track,
-      }))
+      // dispatch(StreamActions.removeTrack({
+      //   userId,
+      //   stream,
+      //   track,
+      // }))
+    }
+    track.onunmute = () => {
+      console.log('on unmute => do nothing');
+      debug('peer: %s, track muted', userId)
+      // dispatch(StreamActions.removeTrack({
+      //   userId,
+      //   stream,
+      //   track,
+      // }))
     }
     dispatch(StreamActions.addStream({
       userId,
