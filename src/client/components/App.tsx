@@ -7,6 +7,7 @@ import { Message } from '../actions/ChatActions'
 import { dismissNotification, Notification } from '../actions/NotifyActions'
 import { Message as MessageType } from '../actions/PeerActions'
 import { removeStream } from '../actions/StreamActions'
+import { refreshPeersDispatch } from '../actions/SocketActions'
 import * as constants from '../constants'
 import Chat from './Chat'
 import GameZone from './GameZone'
@@ -33,6 +34,7 @@ export interface AppProps {
   streams: StreamsState
   getDesktopStream: typeof getDesktopStream
   removeStream: typeof removeStream
+  refreshPeersDispatch: typeof refreshPeersDispatch
   onSendFile: (file: File) => void
   toggleActive: (userId: string) => void
 }
@@ -65,14 +67,15 @@ export default class App extends React.PureComponent<AppProps, AppState> {
     init()
   }
   onHangup = () => {
-    const localStreams = this.getLocalStreams()
+    const localStreams = this.getLocalStreams();
     forEach(localStreams, s => {
-      this.props.removeStream(constants.ME, s.stream)
-    })
-  }
+      // this.props.removeStream(constants.ME, s.stream);
+      this.props.refreshPeersDispatch();
+    });
+  };
   getLocalStreams() {
-    const ls = this.props.streams[constants.ME]
-    return ls ? keyBy(ls.streams, 'type') : {}
+    const ls = this.props.streams[constants.ME];
+    return ls ? keyBy(ls.streams, 'type') : {};
   }
   render () {
     const {

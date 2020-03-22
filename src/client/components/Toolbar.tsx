@@ -204,7 +204,6 @@ extends React.PureComponent<ToolbarProps, ToolbarState> {
               title="Hang Up"
             />
           )}
-
       </div>
     )
   }

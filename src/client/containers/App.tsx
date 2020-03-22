@@ -6,6 +6,7 @@ import { sendFile, sendMessage } from '../actions/PeerActions'
 import { toggleActive, removeStream } from '../actions/StreamActions'
 import App from '../components/App'
 import { State } from '../store'
+import { refreshPeersDispatch } from '../actions/SocketActions';
 
 function mapStateToProps (state: State) {
   return {
@@ -25,6 +26,7 @@ const mapDispatchToProps = {
   dismissNotification,
   getDesktopStream,
   removeStream,
+  refreshPeersDispatch,
   init,
   onSendFile: sendFile,
   play,

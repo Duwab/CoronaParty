@@ -11,7 +11,7 @@ settings:
 rules:
   max-len:
     - warn
-    - code: 80
+    - code: 120
       ignorePattern: '^import .* from '
   comma-dangle:
     - warn

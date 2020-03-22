@@ -55,7 +55,7 @@ export interface UserIdPayload {
 export const addStream = (payload: AddStreamPayload): AddStreamAction => ({
   type: constants.STREAM_ADD,
   payload,
-})
+});
 
 export const removeStream = (
   userId: string,

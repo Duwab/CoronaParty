@@ -50,6 +50,6 @@ router.use('/', index)
 app.use(BASE_URL, router)
 
 const stores = configureStores(io, config.store)
-io.on('connection', socket => handleSocket(socket, io, stores))
+io.on('connection', socketConnection => handleSocket(socketConnection, io, stores))
 
 export default server

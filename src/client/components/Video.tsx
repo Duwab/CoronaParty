@@ -1,8 +1,8 @@
-import React, { ReactEventHandler } from 'react'
-import classnames from 'classnames'
-import { StreamWithURL } from '../reducers/streams'
-import { NicknameMessage } from '../actions/PeerActions'
-import { Nickname } from './Nickname'
+import React, { ReactEventHandler } from 'react';
+import classnames from 'classnames';
+import { StreamWithURL } from '../reducers/streams';
+import { NicknameMessage } from '../actions/PeerActions';
+import { Nickname } from './Nickname';
 
 export interface VideoProps {
   // videos: Record<string, unknown>

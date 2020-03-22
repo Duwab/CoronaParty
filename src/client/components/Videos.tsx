@@ -1,11 +1,11 @@
-import React from 'react'
-import { StreamWithURL, StreamsState } from '../reducers/streams'
-import forEach from 'lodash/forEach'
-import { ME } from '../constants'
-import { getNickname } from '../nickname'
-import Video from './Video'
-import { Nicknames } from '../reducers/nicknames'
-import { NicknameMessage } from '../actions/PeerActions'
+import React from 'react';
+import { StreamWithURL, StreamsState } from '../reducers/streams';
+import forEach from 'lodash/forEach';
+import { ME } from '../constants';
+import { getNickname } from '../nickname';
+import Video from './Video';
+import { Nicknames } from '../reducers/nicknames';
+import { NicknameMessage } from '../actions/PeerActions';
 
 export interface VideosProps {
   active: string | null

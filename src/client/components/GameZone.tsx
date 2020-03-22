@@ -18,11 +18,9 @@ const styles: CSSProperties = {
 };
 
 function mapStateToProps(state: State): GameZoneProps {
-  console.log('something happens');
   const localStream = state.streams[ME];
   const visible = !!localStream &&
     localStream.streams.filter(s => s.type === STREAM_TYPE_CAMERA).length > 0;
-  console.log('visible', visible)
   return {
     media: state.media,
     visible,

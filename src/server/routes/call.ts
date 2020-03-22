@@ -15,11 +15,12 @@ router.post('/', (req, res) => {
 
 router.get('/:callId', (req, res) => {
   const iceServers = turn.processServers(cfgIceServers)
+  // MARKER : here we have all initial values (userId is set here > shall be 'windowId')
   res.render('call', {
     callId: encodeURIComponent(req.params.callId),
     userId: v4(),
     iceServers,
-  })
-})
+  });
+});
 
 export default router
