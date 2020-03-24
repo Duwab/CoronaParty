@@ -1,4 +1,4 @@
-import classnames from 'classnames'
+import classnames from 'classnames';
 import React, { CSSProperties, Ref, RefObject } from 'react';
 import { connect } from 'react-redux';
 import { State } from '../../store';

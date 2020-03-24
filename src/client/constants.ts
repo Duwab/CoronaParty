@@ -44,3 +44,16 @@ export const STREAM_TRACK_REMOVE = 'PEER_STREAM_TRACK_REMOVE'
 
 export const STREAM_TYPE_CAMERA = 'camera'
 export const STREAM_TYPE_DESKTOP = 'desktop'
+
+
+interface GameSelectOption {
+  value: string
+  label: string
+}
+export const GAME_SELECT_ACTION = '';
+export const GAMES_AVAILABLE_OPTIONS: GameSelectOption[] = [
+  {value: 'karaoke', label: 'Karaoke'},
+  {value: 'keyboard', label: 'Keyboard'},
+  {value: 'debug', label: 'Debug'},
+  {value: 'none', label: 'None'},
+];
