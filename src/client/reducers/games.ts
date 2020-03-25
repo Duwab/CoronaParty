@@ -1,10 +1,10 @@
-import { GAME_SELECT_ACTION } from '../constants'
-import { GameActions } from '../actions/GameActions'
+import { GAME_SELECT_ACTION, GAME_SELECTED_DEFAULT } from '../constants';
+import { GameActions } from '../actions/GameActions';
 
 export type GameStateType = Record<string, any>
 
 const defaultState: GameStateType = {
-  selectedGame: 'none'
+  selectedGame: GAME_SELECTED_DEFAULT
 };
 
 export default function games(
@@ -13,7 +13,6 @@ export default function games(
 ) {
   switch (action.type) {
     case GAME_SELECT_ACTION:
-      console.log('select game', action.payload);
       return {
         ...state,
         selectedGame: action.payload

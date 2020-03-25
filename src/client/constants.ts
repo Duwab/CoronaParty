@@ -51,6 +51,7 @@ interface GameSelectOption {
   label: string
 }
 export const GAME_SELECT_ACTION = '';
+export const GAME_SELECTED_DEFAULT = 'debug';
 export const GAMES_AVAILABLE_OPTIONS: GameSelectOption[] = [
   {value: 'karaoke', label: 'Karaoke'},
   {value: 'keyboard', label: 'Keyboard'},

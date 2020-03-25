@@ -1,8 +1,8 @@
-import socket from '../socket'
-import { ThunkResult } from '../store'
-import { callId, userId } from '../window'
-import * as NotifyActions from './NotifyActions'
-import * as SocketActions from './SocketActions'
+import socket from '../socket';
+import { ThunkResult } from '../store';
+import { callId, userId } from '../window';
+import * as NotifyActions from './NotifyActions';
+import * as SocketActions from './SocketActions';
 
 export interface InitAction {
   type: 'INIT'
