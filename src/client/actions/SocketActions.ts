@@ -1,10 +1,10 @@
-import * as NotifyActions from '../actions/NotifyActions'
-import * as PeerActions from '../actions/PeerActions'
-import * as constants from '../constants'
-import _debug from 'debug'
-import { Dispatch, GetState, ThunkResult } from '../store'
-import socket, { ClientSocket } from '../socket'
-import { SocketEvent, User } from '../../shared'
+import * as NotifyActions from '../actions/NotifyActions';
+import * as PeerActions from '../actions/PeerActions';
+import * as constants from '../constants';
+import _debug from 'debug';
+import { Dispatch, GetState, ThunkResult } from '../store';
+import socket, { ClientSocket } from '../socket';
+import { SocketEvent, User } from '../../shared';
 import { callId, userId } from '../window';
 import { removePeer } from '../actions/PeerActions';
 import { Instance } from 'simple-peer';
@@ -146,7 +146,7 @@ export const refreshPeersDispatch = (): RefreshPeersAction => {
   };
 };
 
-
+// MARKER this is not "Socket.io" handshake, this is "our" handshake.
 export function handshake(options: HandshakeOptions) {
   // MARKER : after handshake, we have window socket infos
   console.log('my handshake', options);
@@ -180,6 +180,6 @@ export function handshake(options: HandshakeOptions) {
     socket.emit('ready', {
       room: roomName,
       userId,
-    })
-  }
+    });
+  };
 }

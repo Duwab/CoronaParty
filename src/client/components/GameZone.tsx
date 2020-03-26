@@ -7,7 +7,7 @@ import Karaoke from './games/Karaoke';
 import Example from './games/Example';
 import Select from 'react-select';
 import DebugComponent from './debug/Debug';
-import { selectGame } from '../actions/GameActions';
+import { selectGameRequest } from '../actions/GameActions';
 
 export interface GameZoneStateProps {
   media: any
@@ -16,7 +16,7 @@ export interface GameZoneStateProps {
 }
 
 export interface GameZoneDispatchProps {
-  selectGame: typeof selectGame
+  selectGame: typeof selectGameRequest
 }
 
 export type GameZoneProps = GameZoneStateProps & GameZoneDispatchProps;
@@ -36,7 +36,7 @@ function mapStateToProps(state: State): GameZoneStateProps {
 }
 
 const mapDispatchToProps: GameZoneDispatchProps = {
-  selectGame,
+  selectGame: selectGameRequest,
 };
 
 const c = connect(mapStateToProps, mapDispatchToProps);

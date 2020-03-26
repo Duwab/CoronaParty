@@ -26,7 +26,20 @@ export default function handleSocket(
         stores.socketIdByUserId.remove(userId),
       ])
     }
-  })
+  });
+
+  socket.on('game:select', async payload => {
+    // const socketId = await stores.socketIdByUserId.get(payload.userId);
+    const room = payload.roomName;
+    console.log('select this game', payload, 'for room', room);
+    if(room) {
+      io.to(room).emit('game:select', payload);
+    }
+  });
+
+  socket.on('game:event', async payload => {
+    console.log('on game event', payload);
+  });
 
   socket.on('signal', async payload => {
     // MARKER : ici des pushs d'information quand a une socket déterminée
@@ -42,7 +55,7 @@ export default function handleSocket(
         signal: payload.signal,
       })
     }
-  })
+  });
 
   socket.on('ready', async payload => {
     const { userId, room } = payload

@@ -50,7 +50,9 @@ interface GameSelectOption {
   value: string
   label: string
 }
-export const GAME_SELECT_ACTION = '';
+export const GAME_SELECT_ACTION = 'GAME_SELECT_ACTION';
+export const GAME_SELECT_ACTION_REQUEST = 'GAME_SELECT_ACTION_REQUEST';
+export const GAME_SELECT_ACTION_CASCADE = 'GAME_SELECT_ACTION_CASCADE';
 export const GAME_SELECTED_DEFAULT = 'debug';
 export const GAMES_AVAILABLE_OPTIONS: GameSelectOption[] = [
   {value: 'karaoke', label: 'Karaoke'},
