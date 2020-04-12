@@ -5,7 +5,7 @@ import { Message } from '../actions/PeerActions'
 import { Nicknames } from '../reducers/nicknames'
 import Input from './Input'
 import { ME } from '../constants'
-import { getNickname } from '../nickname'
+import HumanService from '../networking/identity/human';
 
 export interface MessageProps {
   message: ChatMessage
@@ -75,7 +75,7 @@ export default class Chat extends React.PureComponent<ChatProps> {
                   <div className="chat-item chat-item-me">
                     <div className="message">
                       <span className="message-user-name">
-                        {getNickname(this.props.nicknames, message.userId)}
+                        {HumanService.getUserNickname(this.props.nicknames, message.userId)}
                       </span>
                       <span className="icon icon-schedule" />
                       <time className="message-time">{message.timestamp}</time>
@@ -96,7 +96,7 @@ export default class Chat extends React.PureComponent<ChatProps> {
                     )}
                     <div className="message">
                       <span className="message-user-name">
-                        {getNickname(this.props.nicknames, message.userId)}
+                        {HumanService.getUserNickname(this.props.nicknames, message.userId)}
                       </span>
                       <span className="icon icon-schedule" />
                       <time className="message-time">{message.timestamp}</time>

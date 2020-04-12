@@ -2,7 +2,7 @@ import React from 'react';
 import { StreamWithURL, StreamsState } from '../reducers/streams';
 import forEach from 'lodash/forEach';
 import { ME } from '../constants';
-import { getNickname } from '../nickname';
+import HumanService from '../networking/identity/human';
 import Video from './Video';
 import { Nicknames } from '../reducers/nicknames';
 import { NicknameMessage } from '../actions/PeerActions';
@@ -64,7 +64,7 @@ export default class Videos extends React.PureComponent<VideosProps> {
         userId={activeProps.key}
         onClick={this.props.toggleActive}
         play={this.props.play}
-        nickname={getNickname(this.props.nicknames, activeProps.userId)}
+        nickname={HumanService.getUserNickname(this.props.nicknames, activeProps.userId)}
         onChangeNickname={this.props.onChangeNickname}
       />
     )
@@ -78,7 +78,7 @@ export default class Videos extends React.PureComponent<VideosProps> {
             key={props.key}
             onClick={this.props.toggleActive}
             play={this.props.play}
-            nickname={getNickname(this.props.nicknames, props.userId)}
+            nickname={HumanService.getUserNickname(this.props.nicknames, props.userId)}
             onChangeNickname={this.props.onChangeNickname}
           />
         ))}
