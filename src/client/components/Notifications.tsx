@@ -1,8 +1,8 @@
-import CSSTransition from 'react-transition-group/CSSTransition'
-import TransitionGroup from 'react-transition-group/TransitionGroup'
-import React from 'react'
-import classnames from 'classnames'
-import { dismissNotification, Notification } from '../actions/NotifyActions'
+import CSSTransition from 'react-transition-group/CSSTransition';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import React from 'react';
+import classnames from 'classnames';
+import { dismissNotification, Notification } from '../actions/NotifyActions';
 
 export interface NotificationsProps {
   notifications: Record<string, Notification>
@@ -13,7 +13,7 @@ export interface NotificationsProps {
 const transitionTimeout = {
   enter: 200,
   exit: 100,
-}
+};
 
 export interface NotificationProps {
   notification: Notification
@@ -23,14 +23,14 @@ export interface NotificationProps {
 
 const Notification = React.memo(
   function Notification(props: NotificationProps) {
-    const { notification } = props
+    const { notification } = props;
     return (
       <div className={classnames(notification.type, 'notification')}>
         {notification.message}
       </div>
-    )
+    );
   },
-)
+);
 
 export default class Notifications
 extends React.PureComponent<NotificationsProps> {
@@ -38,7 +38,7 @@ extends React.PureComponent<NotificationsProps> {
     max: 20,
   }
   render () {
-    const { dismiss, notifications, max } = this.props
+    const { dismiss, notifications, max } = this.props;
     return (
       <div className="notifications" tabIndex={0}>
         <TransitionGroup>
@@ -57,6 +57,6 @@ extends React.PureComponent<NotificationsProps> {
           ))}
         </TransitionGroup>
       </div>
-    )
+    );
   }
 }

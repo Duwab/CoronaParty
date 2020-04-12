@@ -7,7 +7,7 @@ import { ClientSocket } from '../socket';
 import { SocketEvent, User } from '../../shared';
 import { Instance } from 'simple-peer';
 
-const debug = _debug('peercalls')
+const debug = _debug('peercalls');
 
 export interface SocketHandlerOptions {
   socket: ClientSocket
@@ -42,7 +42,7 @@ class SocketHandler {
     const peer = getState().peers[userId];
     // debug('socket signal, userId: %s, signal: %o', userId, signal);
     if (!peer) return debug('user: %s, no peer found', userId);
-    peer.signal(signal)
+    peer.signal(signal);
   };
   handleUsers = ({initiator, users}: SocketEvent['users']) => {
     const {socket, stream, dispatch, getState} = this;
@@ -73,7 +73,7 @@ class SocketHandler {
     const {socket, roomName, userId} = this;
     socket.emit('ready', {
       room: roomName,
-      userId
+      userId,
     });
   }
 
@@ -130,7 +130,7 @@ export function refreshPeers() {
 }
 
 interface RefreshPeersAction {
-  type: string;
+  type: string
   payload: {}
 }
 

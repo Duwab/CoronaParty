@@ -1,14 +1,14 @@
-import classnames from 'classnames'
-import React from 'react'
-import screenfull from 'screenfull'
-import { removeStream } from '../actions/StreamActions'
-import { getDesktopStream } from '../actions/MediaActions'
-import { StreamWithURL } from '../reducers/streams'
-import { ME } from '../constants'
+import classnames from 'classnames';
+import React from 'react';
+import screenfull from 'screenfull';
+import { removeStream } from '../actions/StreamActions';
+import { getDesktopStream } from '../actions/MediaActions';
+import { StreamWithURL } from '../reducers/streams';
+import { ME } from '../constants';
 
 const hidden = {
   display: 'none',
-}
+};
 
 export interface ToolbarProps {
   messagesCount: number
@@ -42,8 +42,8 @@ export interface ToolbarButtonProps {
 
 
 function ToolbarButton(props: ToolbarButtonProps) {
-  const { blink, on } = props
-  const icon = !on && props.offIcon ? props.offIcon : props.icon
+  const { blink, on } = props;
+  const icon = !on && props.offIcon ? props.offIcon : props.icon;
 
   return (
     <a
@@ -56,7 +56,7 @@ function ToolbarButton(props: ToolbarButtonProps) {
       </span>
       <span className="tooltip">{props.title}</span>
     </a>
-  )
+  );
 }
 
 export default class Toolbar
@@ -64,72 +64,72 @@ extends React.PureComponent<ToolbarProps, ToolbarState> {
   file = React.createRef<HTMLInputElement>()
 
   constructor(props: ToolbarProps) {
-    super(props)
+    super(props);
     this.state = {
       readMessages: props.messagesCount,
       camDisabled: false,
       micMuted: false,
       fullScreenEnabled: false,
-    }
+    };
   }
 
   handleMicClick = () => {
-    const { stream } = this.props
+    const { stream } = this.props;
     stream.stream.getAudioTracks().forEach(track => {
-      track.enabled = !track.enabled
-    })
+      track.enabled = !track.enabled;
+    });
     this.setState({
       ...this.state,
       micMuted: !this.state.micMuted,
-    })
+    });
   }
   handleCamClick = () => {
-    const { stream } = this.props
+    const { stream } = this.props;
     stream.stream.getVideoTracks().forEach(track => {
-      track.enabled = !track.enabled
-    })
+      track.enabled = !track.enabled;
+    });
     this.setState({
       ...this.state,
       camDisabled: !this.state.camDisabled,
-    })
+    });
   }
   handleFullscreenClick = () => {
     if (screenfull.isEnabled) {
-      screenfull.toggle()
+      screenfull.toggle();
       this.setState({
         ...this.state,
         fullScreenEnabled: !screenfull.isFullscreen,
-      })
+      });
     }
   }
   handleHangoutClick = () => {
-    window.location.href = '/'
+    window.location.href = '/';
   }
   handleSendFile = () => {
-    this.file.current!.click()
+    this.file.current!.click();
   }
   handleSelectFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     Array
     .from(event.target!.files!)
-    .forEach(file => this.props.onSendFile(file))
+    .forEach(file => this.props.onSendFile(file));
   }
   handleToggleChat = () => {
     this.setState({
       readMessages: this.props.messagesCount,
-    })
-    this.props.onToggleChat()
+    });
+    this.props.onToggleChat();
   }
   handleToggleShareDesktop = () => {
     if (this.props.desktopStream) {
-      this.props.onRemoveStream(ME, this.props.desktopStream.stream)
+      this.props.onRemoveStream(ME, this.props.desktopStream.stream);
     } else {
-      this.props.onGetDesktopStream().catch(() => {})
+      this.props.onGetDesktopStream().catch(() => {});
     }
   }
   render () {
-    const { messagesCount, stream } = this.props
-    const unreadCount = messagesCount - this.state.readMessages
-    const hasUnread = unreadCount > 0
+    const { messagesCount, stream } = this.props;
+    const unreadCount = messagesCount - this.state.readMessages;
+    const hasUnread = unreadCount > 0;
 
     return (
       <div className="toolbar active">
@@ -205,6 +205,6 @@ extends React.PureComponent<ToolbarProps, ToolbarState> {
             />
           )}
       </div>
-    )
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Action } from 'redux'
+import { Action } from 'redux';
 
 export type PendingAction<T extends string, P> = Action<T> & Promise<P> & {
   status: 'pending'
@@ -20,7 +20,7 @@ export function isRejectedAction(
   // eslint-disable-next-line
   const v = value as any
   return !!v && 'type' in v && typeof v.type === 'string' &&
-    'status' in v && v.status === 'rejected'
+    'status' in v && v.status === 'rejected';
 }
 
 export type AsyncAction<T extends string, P> =
@@ -45,14 +45,14 @@ export type GetAllAsyncActions<T> = GetAsyncAction<GetAllActions<T>>
 
 function isPromise(value: unknown): value is Promise<unknown> {
   return value && typeof value === 'object' &&
-    typeof (value as Promise<unknown>).then === 'function'
+    typeof (value as Promise<unknown>).then === 'function';
 }
 
 export function isPendingAction(
   value: unknown,
 ): value is PendingAction<string, unknown> {
   return isPromise(value) &&
-    typeof (value as unknown as { type: 'string' }).type === 'string'
+    typeof (value as unknown as { type: 'string' }).type === 'string';
 }
 
 export function makeAction<A extends unknown[], T extends string, P>(
@@ -60,9 +60,9 @@ export function makeAction<A extends unknown[], T extends string, P>(
   impl: (...args: A) => Promise<P>,
 ): (...args: A) => PendingAction<T, P> {
   return (...args: A) => {
-    const pendingAction = impl(...args) as PendingAction<T, P>
-    pendingAction.type = type
-    pendingAction.status = 'pending'
-    return pendingAction
-  }
+    const pendingAction = impl(...args) as PendingAction<T, P>;
+    pendingAction.type = type;
+    pendingAction.status = 'pending';
+    return pendingAction;
+  };
 }

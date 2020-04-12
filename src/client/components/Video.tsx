@@ -32,14 +32,14 @@ export default class Video extends React.PureComponent<VideoProps> {
     if (this.timeout) {
       // if the timeout was cancelled, execute click
       this.props.play();
-      onClick(userId)
+      onClick(userId);
     }
-    this.timeout = undefined
+    this.timeout = undefined;
   };
 
   handleMouseDown: ReactEventHandler<HTMLVideoElement> = e => {
     clearTimeout(this.timeout);
-    this.timeout = window.setTimeout(this.toggleCover, 300)
+    this.timeout = window.setTimeout(this.toggleCover, 300);
   };
 
   handleMouseUp: ReactEventHandler<HTMLVideoElement> = e => {
@@ -47,15 +47,15 @@ export default class Video extends React.PureComponent<VideoProps> {
   };
 
   toggleCover = () => {
-    this.timeout = undefined
-    const v = this.videoRef.current
+    this.timeout = undefined;
+    const v = this.videoRef.current;
     if (v) {
-      v.style.objectFit = v.style.objectFit ? '' : 'cover'
+      v.style.objectFit = v.style.objectFit ? '' : 'cover';
     }
   };
 
   componentDidMount() {
-    this.componentDidUpdate()
+    this.componentDidUpdate();
   }
 
   componentDidUpdate() {
@@ -65,7 +65,7 @@ export default class Video extends React.PureComponent<VideoProps> {
     const url = stream && stream.url;
     if ('srcObject' in video as unknown) {
       if (video.srcObject !== mediaStream) {
-        video.srcObject = mediaStream
+        video.srcObject = mediaStream;
       }
     } else if (video.src !== url) {
       video.src = url || '';

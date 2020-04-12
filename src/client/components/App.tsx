@@ -1,24 +1,24 @@
-import classnames from 'classnames'
-import keyBy from 'lodash/keyBy'
-import forEach from 'lodash/forEach'
-import React from 'react'
-import Peer from 'simple-peer'
-import { Message } from '../actions/ChatActions'
-import { dismissNotification, Notification } from '../actions/NotifyActions'
-import { Message as MessageType } from '../actions/PeerActions'
-import { removeStream } from '../actions/StreamActions'
-import { refreshPeersDispatch } from '../actions/SocketActions'
-import * as constants from '../constants'
-import Chat from './Chat'
-import GameZone from './GameZone'
-import { Media } from './Media'
-import Notifications from './Notifications'
-import { Side } from './Side'
-import Toolbar from './Toolbar'
-import Videos from './Videos'
-import { getDesktopStream } from '../actions/MediaActions'
-import { StreamsState } from '../reducers/streams'
-import { Nicknames } from '../reducers/nicknames'
+import classnames from 'classnames';
+import keyBy from 'lodash/keyBy';
+import forEach from 'lodash/forEach';
+import React from 'react';
+import Peer from 'simple-peer';
+import { Message } from '../actions/ChatActions';
+import { dismissNotification, Notification } from '../actions/NotifyActions';
+import { Message as MessageType } from '../actions/PeerActions';
+import { removeStream } from '../actions/StreamActions';
+import { refreshPeersDispatch } from '../actions/SocketActions';
+import * as constants from '../constants';
+import Chat from './Chat';
+import GameZone from './GameZone';
+import { Media } from './Media';
+import Notifications from './Notifications';
+import { Side } from './Side';
+import Toolbar from './Toolbar';
+import Videos from './Videos';
+import { getDesktopStream } from '../actions/MediaActions';
+import { StreamsState } from '../reducers/streams';
+import { Nicknames } from '../reducers/nicknames';
 
 export interface AppProps {
   active: string | null
@@ -50,21 +50,21 @@ export default class App extends React.PureComponent<AppProps, AppState> {
   handleShowChat = () => {
     this.setState({
       chatVisible: true,
-    })
+    });
   }
   handleHideChat = () => {
     this.setState({
       chatVisible: false,
-    })
+    });
   }
   handleToggleChat = () => {
     return this.state.chatVisible
       ? this.handleHideChat()
-      : this.handleShowChat()
+      : this.handleShowChat();
   }
   componentDidMount () {
-    const { init } = this.props
-    init()
+    const { init } = this.props;
+    init();
   }
   onHangup = () => {
     const localStreams = this.getLocalStreams();
@@ -86,13 +86,13 @@ export default class App extends React.PureComponent<AppProps, AppState> {
       messagesCount,
       onSendFile,
       sendMessage,
-    } = this.props
+    } = this.props;
 
     const chatVisibleClassName = classnames({
       'chat-visible': this.state.chatVisible,
-    })
+    });
 
-    const localStreams = this.getLocalStreams()
+    const localStreams = this.getLocalStreams();
 
     return (
       <div className="app">
@@ -136,6 +136,6 @@ export default class App extends React.PureComponent<AppProps, AppState> {
           toggleActive={this.props.toggleActive}
         />
       </div>
-    )
+    );
   }
 }

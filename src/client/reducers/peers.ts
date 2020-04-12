@@ -1,10 +1,10 @@
-import forEach from 'lodash/forEach'
-import omit from 'lodash/omit'
-import Peer from 'simple-peer'
-import { PeerAction } from '../actions/PeerActions'
-import * as constants from '../constants'
-import { MediaStreamAction } from '../actions/MediaActions'
-import { RemoveStreamAction, StreamType } from '../actions/StreamActions'
+import forEach from 'lodash/forEach';
+import omit from 'lodash/omit';
+import Peer from 'simple-peer';
+import { PeerAction } from '../actions/PeerActions';
+import * as constants from '../constants';
+import { MediaStreamAction } from '../actions/MediaActions';
+import { RemoveStreamAction, StreamType } from '../actions/StreamActions';
 
 export type PeersState = Record<string, Peer.Instance>
 
@@ -31,7 +31,7 @@ function handleMediaStream(
   state: PeersState,
   action: MediaStreamAction,
 ): PeersState {
-  console.log('handleMediaStream', action.status)
+  console.log('handleMediaStream', action.status);
   if (action.status !== 'resolved') {
     return state;
   }
@@ -73,12 +73,12 @@ function _refreshLocalStreamWithPeers(state: PeersState, streamType: StreamType,
     peers: state,
     streamType,
     currentStream: localStreams[streamType],
-    newStream: stream
+    newStream: stream,
   };
 }
 
 function _unsyncLocalStreamWithPeers(state: PeersState, stream: MediaStream) {
-  console.log(`UN-sync local stream with others`)
+  console.log(`UN-sync local stream with others`);
   forEach(state, peer => {
     stream.getTracks().forEach(track => {
       peer.removeTrack(track, stream);
@@ -93,28 +93,28 @@ export default function peers(
   switch (action.type) {
     case constants.PEER_ADD:
       // MARKER
-      console.log('peer add')
+      console.log('peer add');
       return {
         ...state,
         [action.payload.userId]: action.payload.peer,
-      }
+      };
     case constants.PEER_REMOVE:
-      return omit(state, [action.payload.userId])
+      return omit(state, [action.payload.userId]);
     case constants.PEERS_DESTROY:
       localStreams = {
         camera: undefined,
         desktop: undefined,
-      }
-      forEach(state, peer => peer.destroy())
-      return defaultState
+      };
+      forEach(state, peer => peer.destroy());
+      return defaultState;
     case constants.STREAM_REMOVE:
-      return handleRemoveStream(state, action)
+      return handleRemoveStream(state, action);
     case constants.MEDIA_STREAM:
       console.log('I handle media stream');
       // MAKER : new stream declared => register properly to enable recurrent refresh
       // on passe ici quand on ajoute un media depuis sa fenetre => pas les streams des autres peers
-      return handleMediaStream(state, action)
+      return handleMediaStream(state, action);
     default:
-      return state
+      return state;
   }
 }

@@ -1,10 +1,10 @@
-import classnames from 'classnames'
-import React from 'react'
-import { Message as ChatMessage } from '../actions/ChatActions'
-import { Message } from '../actions/PeerActions'
-import { Nicknames } from '../reducers/nicknames'
-import Input from './Input'
-import { ME } from '../constants'
+import classnames from 'classnames';
+import React from 'react';
+import { Message as ChatMessage } from '../actions/ChatActions';
+import { Message } from '../actions/PeerActions';
+import { Nicknames } from '../reducers/nicknames';
+import Input from './Input';
+import { ME } from '../constants';
 import HumanService from '../networking/identity/human';
 
 export interface MessageProps {
@@ -12,7 +12,7 @@ export interface MessageProps {
 }
 
 function MessageEntry (props: MessageProps) {
-  const { message } = props
+  const { message } = props;
   return (
     <p className="message-text">
       {message.image && (
@@ -20,7 +20,7 @@ function MessageEntry (props: MessageProps) {
       )}
       {message.message}
     </p>
-  )
+  );
 }
 
 export interface ChatProps {
@@ -36,24 +36,24 @@ export default class Chat extends React.PureComponent<ChatProps> {
   inputRef = React.createRef<Input>()
 
   scrollToBottom = () => {
-    const chatHistoryRef = this.chatHistoryRef.current!
-    chatHistoryRef.scrollTop = chatHistoryRef.scrollHeight
+    const chatHistoryRef = this.chatHistoryRef.current!;
+    chatHistoryRef.scrollTop = chatHistoryRef.scrollHeight;
   }
   componentDidMount () {
-    this.scrollToBottom()
-    this.focus()
+    this.scrollToBottom();
+    this.focus();
   }
   componentDidUpdate () {
-    this.scrollToBottom()
-    this.focus()
+    this.scrollToBottom();
+    this.focus();
   }
   focus() {
     if (this.props.visible) {
-      this.inputRef.current?.textArea.current?.focus()
+      this.inputRef.current?.textArea.current?.focus();
     }
   }
   render () {
-    const { messages, sendMessage } = this.props
+    const { messages, sendMessage } = this.props;
     return (
       <div className={classnames('chat-container', {
         show: this.props.visible,
@@ -117,6 +117,6 @@ export default class Chat extends React.PureComponent<ChatProps> {
 
         <Input ref={this.inputRef} sendMessage={sendMessage} />
       </div>
-    )
+    );
   }
 }

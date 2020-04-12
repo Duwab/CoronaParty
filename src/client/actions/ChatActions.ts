@@ -1,4 +1,4 @@
-import { MESSAGE_ADD } from '../constants'
+import { MESSAGE_ADD } from '../constants';
 
 export interface MessageAddAction {
   type: 'MESSAGE_ADD'
@@ -15,4 +15,4 @@ export interface Message {
 export const addMessage = (message: Message): MessageAddAction => ({
   type: MESSAGE_ADD,
   payload: message,
-})
+});

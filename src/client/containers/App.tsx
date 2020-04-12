@@ -1,11 +1,11 @@
-import { connect } from 'react-redux'
-import { init } from '../actions/CallActions'
-import { getDesktopStream, play } from '../actions/MediaActions'
-import { dismissNotification } from '../actions/NotifyActions'
-import { sendFile, sendMessage } from '../actions/PeerActions'
-import { toggleActive, removeStream } from '../actions/StreamActions'
-import App from '../components/App'
-import { State } from '../store'
+import { connect } from 'react-redux';
+import { init } from '../actions/CallActions';
+import { getDesktopStream, play } from '../actions/MediaActions';
+import { dismissNotification } from '../actions/NotifyActions';
+import { sendFile, sendMessage } from '../actions/PeerActions';
+import { toggleActive, removeStream } from '../actions/StreamActions';
+import App from '../components/App';
+import { State } from '../store';
 import { refreshPeersDispatch } from '../actions/SocketActions';
 
 function mapStateToProps (state: State) {
@@ -17,7 +17,7 @@ function mapStateToProps (state: State) {
     messages: state.messages.list,
     messagesCount: state.messages.count,
     active: state.active,
-  }
+  };
 }
 
 const mapDispatchToProps = {
@@ -30,6 +30,6 @@ const mapDispatchToProps = {
   init,
   onSendFile: sendFile,
   play,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

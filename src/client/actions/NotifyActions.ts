@@ -1,47 +1,47 @@
-import uniqueId from 'lodash/uniqueId'
-import * as constants from '../constants'
+import uniqueId from 'lodash/uniqueId';
+import * as constants from '../constants';
 
 function format (string: string, args: string[]) {
   string = args
-  .reduce((string, arg, i) => string.replace('{' + i + '}', arg), string)
-  return string
+  .reduce((string, arg, i) => string.replace('{' + i + '}', arg), string);
+  return string;
 }
 
 export type NotifyType = 'info' | 'warning' | 'error'
 
 function notify(type: NotifyType, args: string[]) {
-  const string = args[0] || ''
-  const message = format(string, Array.prototype.slice.call(args, 1))
-  const id = uniqueId('notification')
-  const payload: Notification = { id, type, message }
+  const string = args[0] || '';
+  const message = format(string, Array.prototype.slice.call(args, 1));
+  const id = uniqueId('notification');
+  const payload: Notification = { id, type, message };
 
-  return addNotification(payload)
+  return addNotification(payload);
 }
 
 export const info = (...args: any[]): NotificationAddAction => {
-  return notify('info', args)
-}
+  return notify('info', args);
+};
 
 export const warning = (...args: any[]): NotificationAddAction => {
-  return notify('warning', args)
-}
+  return notify('warning', args);
+};
 
 export const error = (...args: any[]): NotificationAddAction => {
-  return notify('error', args)
-}
+  return notify('error', args);
+};
 
 function addNotification(payload: Notification): NotificationAddAction {
   return {
     type: constants.NOTIFY,
     payload,
-  }
+  };
 }
 
 export function dismissNotification(id: string): NotificationDismissAction {
   return {
     type: constants.NOTIFY_DISMISS,
     payload: { id },
-  }
+  };
 }
 
 export interface Notification {
@@ -66,7 +66,7 @@ export interface NotificationClearAction {
 
 export const clear = (): NotificationClearAction => ({
   type: constants.NOTIFY_CLEAR,
-})
+});
 
 export type NotificationActionType =
   NotificationAddAction |

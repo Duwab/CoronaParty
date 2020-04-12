@@ -1,4 +1,4 @@
-import { NICKNAME_SET } from '../constants'
+import { NICKNAME_SET } from '../constants';
 
 export interface NicknameSetPayload {
   nickname: string
@@ -14,7 +14,7 @@ export function setNickname(payload: NicknameSetPayload): NicknameSetAction {
   return {
     type: NICKNAME_SET,
     payload,
-  }
+  };
 }
 
 export type NicknameActions = NicknameSetAction

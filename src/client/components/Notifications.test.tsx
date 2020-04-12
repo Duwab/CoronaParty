@@ -1,12 +1,12 @@
-import Notifications from './Notifications'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Notification, NotificationDismissAction } from '../actions/NotifyActions'
+import Notifications from './Notifications';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Notification, NotificationDismissAction } from '../actions/NotifyActions';
 
 describe('Notifications', () => {
 
-  let notifications: Record<string, Notification>
-  let dismiss: jest.Mock<NotificationDismissAction, [string]>
+  let notifications: Record<string, Notification>;
+  let dismiss: jest.Mock<NotificationDismissAction, [string]>;
   beforeEach(() => {
     notifications = {
       one: {
@@ -14,13 +14,13 @@ describe('Notifications', () => {
         message: 'test',
         type: 'error',
       },
-    }
-    dismiss = jest.fn()
-  })
+    };
+    dismiss = jest.fn();
+  });
 
-  let div: HTMLDivElement
+  let div: HTMLDivElement;
   async function render() {
-    div = document.createElement('div')
+    div = document.createElement('div');
     return new Promise<Notifications>(resolve => {
       ReactDOM.render(
         <Notifications
@@ -29,15 +29,15 @@ describe('Notifications', () => {
           dismiss={dismiss}
         />,
         div,
-      )
-    })
+      );
+    });
   }
 
   describe('render', () => {
     it('renders', async () => {
-      await render()
-      ReactDOM.unmountComponentAtNode(div)
-    })
-  })
+      await render();
+      ReactDOM.unmountComponentAtNode(div);
+    });
+  });
 
-})
+});

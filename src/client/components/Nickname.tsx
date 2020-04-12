@@ -1,5 +1,5 @@
-import React from 'react'
-import { NicknameMessage } from '../actions/PeerActions'
+import React from 'react';
+import { NicknameMessage } from '../actions/PeerActions';
 
 export interface NicknameProps {
   value: string
@@ -15,9 +15,9 @@ export class Nickname extends React.PureComponent<NicknameProps> {
           value={this.props.value}
           onChange={this.props.onChange}
         />
-      )
+      );
     }
-    return <ReadOnlyNickname value={this.props.value} />
+    return <ReadOnlyNickname value={this.props.value} />;
   }
 }
 
@@ -26,17 +26,17 @@ interface EditableNicknameProps {
   onChange: (message: NicknameMessage) => void
 }
 
-const MemoEditableNickname = React.memo(EditableNickname)
+const MemoEditableNickname = React.memo(EditableNickname);
 
 function EditableNickname(props: EditableNicknameProps) {
 
-  const [value, setValue] = React.useState(props.value)
+  const [value, setValue] = React.useState(props.value);
   const handleChange =
-    (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
+    (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
   function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
-      e.currentTarget.blur()
+      e.currentTarget.blur();
     }
   }
 
@@ -44,7 +44,7 @@ function EditableNickname(props: EditableNicknameProps) {
     props.onChange({
       type: 'nickname',
       payload: { nickname: value },
-    })
+    });
   }
 
   return (
@@ -56,7 +56,7 @@ function EditableNickname(props: EditableNicknameProps) {
       onBlur={update}
       value={value}
     />
-  )
+  );
 }
 
 interface ReadOnlyNicknameProps {
@@ -64,5 +64,5 @@ interface ReadOnlyNicknameProps {
 }
 
 function ReadOnlyNickname(props: ReadOnlyNicknameProps) {
-  return <span className="nickname">{props.value}</span>
+  return <span className="nickname">{props.value}</span>;
 }

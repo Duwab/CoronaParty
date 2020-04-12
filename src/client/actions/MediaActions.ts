@@ -1,9 +1,9 @@
-import { makeAction, AsyncAction } from '../async'
-import { MEDIA_AUDIO_CONSTRAINT_SET, MEDIA_VIDEO_CONSTRAINT_SET, MEDIA_ENUMERATE, MEDIA_STREAM, ME, STREAM_TYPE_CAMERA, STREAM_TYPE_DESKTOP } from '../constants'
-import _debug from 'debug'
-import { AddStreamPayload } from './StreamActions'
+import { makeAction, AsyncAction } from '../async';
+import { MEDIA_AUDIO_CONSTRAINT_SET, MEDIA_VIDEO_CONSTRAINT_SET, MEDIA_ENUMERATE, MEDIA_STREAM, ME, STREAM_TYPE_CAMERA, STREAM_TYPE_DESKTOP } from '../constants';
+import _debug from 'debug';
+import { AddStreamPayload } from './StreamActions';
 
-const debug = _debug('peercalls')
+const debug = _debug('peercalls');
 
 export interface MediaDevice {
   id: string
@@ -12,7 +12,7 @@ export interface MediaDevice {
 }
 
 export const enumerateDevices = makeAction(MEDIA_ENUMERATE, async () => {
-  const devices = await navigator.mediaDevices.enumerateDevices()
+  const devices = await navigator.mediaDevices.enumerateDevices();
 
   return devices
   .filter(
@@ -21,9 +21,9 @@ export const enumerateDevices = makeAction(MEDIA_ENUMERATE, async () => {
     id: device.deviceId,
     type: device.kind,
     name: device.label,
-  }) as MediaDevice)
+  }) as MediaDevice);
 
-})
+});
 
 export type FacingMode = 'user' | 'environment'
 
@@ -54,22 +54,22 @@ async function getUserMedia(
   constraints: MediaStreamConstraints,
 ): Promise<MediaStream> {
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    return navigator.mediaDevices.getUserMedia(constraints)
+    return navigator.mediaDevices.getUserMedia(constraints);
   }
 
   const _getUserMedia: typeof navigator.getUserMedia =
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia
+    navigator.mozGetUserMedia;
 
   return new Promise<MediaStream>((resolve, reject) => {
-    _getUserMedia.call(navigator, constraints, resolve, reject)
-  })
+    _getUserMedia.call(navigator, constraints, resolve, reject);
+  });
 }
 
 async function getDisplayMedia(): Promise<MediaStream> {
   const mediaDevices = navigator.mediaDevices as any // eslint-disable-line
-  return mediaDevices.getDisplayMedia({video: true, audio: false})
+  return mediaDevices.getDisplayMedia({video: true, audio: false});
 }
 
 export interface MediaVideoConstraintAction {
@@ -88,7 +88,7 @@ export function setVideoConstraint(
   return {
     type: MEDIA_VIDEO_CONSTRAINT_SET,
     payload,
-  }
+  };
 }
 
 export function setAudioConstraint(
@@ -97,42 +97,42 @@ export function setAudioConstraint(
   return {
     type: MEDIA_AUDIO_CONSTRAINT_SET,
     payload,
-  }
+  };
 }
 
 export const play = makeAction('MEDIA_PLAY', async () => {
   const promises = Array
   .from(document.querySelectorAll('video'))
   .filter(video => video.paused)
-  .map(video => video.play())
-  await Promise.all(promises)
-})
+  .map(video => video.play());
+  await Promise.all(promises);
+});
 
 export const getMediaStream = makeAction(
   MEDIA_STREAM,
   async (constraints: GetMediaConstraints) => {
-    debug('getMediaStream', constraints)
+    debug('getMediaStream', constraints);
     const payload: AddStreamPayload = {
       stream: await getUserMedia(constraints),
       type: STREAM_TYPE_CAMERA,
       userId: ME,
-    }
-    return payload
+    };
+    return payload;
   },
-)
+);
 
 export const getDesktopStream = makeAction(
   MEDIA_STREAM,
   async () => {
-    debug('getDesktopStream')
+    debug('getDesktopStream');
     const payload: AddStreamPayload = {
       stream: await getDisplayMedia(),
       type: STREAM_TYPE_DESKTOP,
       userId: ME,
-    }
-    return payload
+    };
+    return payload;
   },
-)
+);
 
 export type MediaEnumerateAction = AsyncAction<'MEDIA_ENUMERATE', MediaDevice[]>
 export type MediaStreamAction = AsyncAction<'MEDIA_STREAM', AddStreamPayload>

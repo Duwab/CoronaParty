@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export interface AlertProps {
   children: React.ReactNode
@@ -10,9 +10,9 @@ export const Alert = React.memo(
       <div className='alert'>
         {props.children}
       </div>
-    )
+    );
   },
-)
+);
 
 export interface AlertsProps {
   children: React.ReactNode
@@ -24,6 +24,6 @@ export const Alerts = React.memo(
       <div className="alerts">
         {props.children}
       </div>
-    )
+    );
   },
-)
+);

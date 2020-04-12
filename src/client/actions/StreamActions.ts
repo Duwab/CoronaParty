@@ -1,4 +1,4 @@
-import * as constants from '../constants'
+import * as constants from '../constants';
 
 export type StreamType = 'camera' | 'desktop'
 
@@ -63,24 +63,24 @@ export const removeStream = (
 ): RemoveStreamAction => ({
   type: constants.STREAM_REMOVE,
   payload: { userId, stream },
-})
+});
 
 export const removeTrack = (
   payload: RemoveStreamTrackPayload,
 ): RemoveStreamTrackAction => ({
   type: constants.STREAM_TRACK_REMOVE,
   payload,
-})
+});
 
 export const setActive = (userId: string): SetActiveStreamAction => ({
   type: constants.ACTIVE_SET,
   payload: { userId },
-})
+});
 
 export const toggleActive = (userId: string): ToggleActiveStreamAction => ({
   type: constants.ACTIVE_TOGGLE,
   payload: { userId },
-})
+});
 
 export type StreamAction =
   AddStreamAction |

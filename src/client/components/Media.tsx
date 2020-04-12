@@ -1,11 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { AudioConstraint, MediaDevice, setAudioConstraint, setVideoConstraint, VideoConstraint, getMediaStream, enumerateDevices, play } from '../actions/MediaActions'
-import { MediaState } from '../reducers/media'
-import { State } from '../store'
-import { Alerts, Alert } from './Alerts'
-import { info, warning, error } from '../actions/NotifyActions'
-import { ME, STREAM_TYPE_CAMERA } from '../constants'
+import React from 'react';
+import { connect } from 'react-redux';
+import { AudioConstraint, MediaDevice, setAudioConstraint, setVideoConstraint, VideoConstraint, getMediaStream, enumerateDevices, play } from '../actions/MediaActions';
+import { MediaState } from '../reducers/media';
+import { State } from '../store';
+import { Alerts, Alert } from './Alerts';
+import { info, warning, error } from '../actions/NotifyActions';
+import { ME, STREAM_TYPE_CAMERA } from '../constants';
 
 export type MediaProps = MediaState & {
   visible: boolean
@@ -20,14 +20,14 @@ export type MediaProps = MediaState & {
 }
 
 function mapStateToProps(state: State) {
-  const localStream = state.streams[ME]
+  const localStream = state.streams[ME];
   const hidden = !!localStream &&
-    localStream.streams.filter(s => s.type === STREAM_TYPE_CAMERA).length > 0
-  const visible = !hidden
+    localStream.streams.filter(s => s.type === STREAM_TYPE_CAMERA).length > 0;
+  const visible = !hidden;
   return {
     ...state.media,
     visible,
-  }
+  };
 }
 
 const mapDispatchToProps = {
@@ -39,43 +39,43 @@ const mapDispatchToProps = {
   logInfo: info,
   logWarning: warning,
   logError: error,
-}
+};
 
-const c = connect(mapStateToProps, mapDispatchToProps)
+const c = connect(mapStateToProps, mapDispatchToProps);
 
 export const MediaForm = React.memo(function MediaForm(props: MediaProps) {
   if (!props.visible) {
-    return null
+    return null;
   }
 
-  React.useMemo(async () => await props.enumerateDevices(), [])
+  React.useMemo(async () => await props.enumerateDevices(), []);
 
   async function onSave(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    return joinCall()
+    event.preventDefault();
+    return joinCall();
   }
 
   async function joinCall() {
-    const { audio, video } = props
+    const { audio, video } = props;
     try {
-      await props.getMediaStream({ audio, video })
+      await props.getMediaStream({ audio, video });
     } catch (err) {
-      props.logError('Error: {0}', err)
+      props.logError('Error: {0}', err);
     }
   }
 
   function onVideoChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const constraint: VideoConstraint = JSON.parse(event.target.value)
-    props.onSetVideoConstraint(constraint)
+    const constraint: VideoConstraint = JSON.parse(event.target.value);
+    props.onSetVideoConstraint(constraint);
   }
 
   function onAudioChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const constraint: AudioConstraint = JSON.parse(event.target.value)
-    props.onSetAudioConstraint(constraint)
+    const constraint: AudioConstraint = JSON.parse(event.target.value);
+    props.onSetAudioConstraint(constraint);
   }
 
-  const videoId = JSON.stringify(props.video)
-  const audioId = JSON.stringify(props.audio)
+  const videoId = JSON.stringify(props.video);
+  const audioId = JSON.stringify(props.audio);
 
   return (
     <form className='media' onSubmit={onSave}>
@@ -107,8 +107,8 @@ export const MediaForm = React.memo(function MediaForm(props: MediaProps) {
         Join Call
       </button>
     </form>
-  )
-})
+  );
+});
 
 export interface AutoplayProps {
   play: () => void
@@ -125,9 +125,9 @@ export const AutoplayMessage = React.memo(
           Play
         </button>
       </React.Fragment>
-    )
+    );
   },
-)
+);
 
 export const Media = c(React.memo(function Media(props: MediaProps) {
   return (
@@ -142,8 +142,8 @@ export const Media = c(React.memo(function Media(props: MediaProps) {
 
       <MediaForm {...props} />
     </div>
-  )
-}))
+  );
+}));
 
 interface OptionsProps {
   devices: MediaDevice[]
@@ -154,10 +154,10 @@ interface OptionsProps {
 const labels = {
   audioinput: 'Audio',
   videoinput: 'Video',
-}
+};
 
 function Options(props: OptionsProps) {
-  const label = labels[props.type]
+  const label = labels[props.type];
   return (
     <React.Fragment>
       <option value='false'>Disable {label}</option>
@@ -175,5 +175,5 @@ function Options(props: OptionsProps) {
         )
       }
     </React.Fragment>
-  )
+  );
 }

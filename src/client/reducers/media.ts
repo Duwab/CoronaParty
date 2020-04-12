@@ -1,5 +1,5 @@
-import { MediaDevice, AudioConstraint, VideoConstraint, MediaAction, MediaEnumerateAction, MediaStreamAction, MediaPlayAction } from '../actions/MediaActions'
-import { MEDIA_ENUMERATE, MEDIA_AUDIO_CONSTRAINT_SET, MEDIA_VIDEO_CONSTRAINT_SET, MEDIA_STREAM, MEDIA_PLAY } from '../constants'
+import { MediaDevice, AudioConstraint, VideoConstraint, MediaAction, MediaEnumerateAction, MediaStreamAction, MediaPlayAction } from '../actions/MediaActions';
+import { MEDIA_ENUMERATE, MEDIA_AUDIO_CONSTRAINT_SET, MEDIA_VIDEO_CONSTRAINT_SET, MEDIA_STREAM, MEDIA_PLAY } from '../constants';
 
 export interface MediaState {
   devices: MediaDevice[]
@@ -17,7 +17,7 @@ const defaultState: MediaState = {
   loading: false,
   error: '',
   autoplayError: false,
-}
+};
 
 export function handleEnumerate(
   state: MediaState,
@@ -29,18 +29,18 @@ export function handleEnumerate(
         ...state,
         loading: false,
         devices: action.payload,
-      }
+      };
       case 'pending':
         return {
           ...state,
           loading: true,
-        }
+        };
       case 'rejected':
         return {
           ...state,
           loading: false,
           error: 'Could not retrieve media devices',
-        }
+        };
   }
 }
 
@@ -52,14 +52,14 @@ export function handleMediaStream(
     case 'resolved':
       return {
         ...state,
-      }
+      };
     case 'rejected':
       return {
         ...state,
         error: action.payload.message,
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 
@@ -73,14 +73,14 @@ export function handlePlay(
       return {
         ...state,
         autoplayError: false,
-      }
+      };
     case 'rejected':
       return {
         ...state,
         autoplayError: true,
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 
@@ -90,22 +90,22 @@ export default function media(
 ): MediaState {
   switch (action.type) {
     case MEDIA_ENUMERATE:
-      return handleEnumerate(state, action)
+      return handleEnumerate(state, action);
     case MEDIA_AUDIO_CONSTRAINT_SET:
       return {
         ...state,
         audio: action.payload,
-      }
+      };
     case MEDIA_VIDEO_CONSTRAINT_SET:
       return {
         ...state,
         video: action.payload,
-      }
+      };
     case MEDIA_STREAM:
-      return handleMediaStream(state, action)
+      return handleMediaStream(state, action);
     case MEDIA_PLAY:
-      return handlePlay(state, action)
+      return handlePlay(state, action);
     default:
-      return state
+      return state;
   }
 }

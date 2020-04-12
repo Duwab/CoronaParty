@@ -28,14 +28,14 @@ interface StreamProps {
 
 export default class Videos extends React.PureComponent<VideosProps> {
   private getStreams() {
-    const { active } = this.props
-    let activeProps: StreamProps | undefined
-    const otherProps: StreamProps[] = []
+    const { active } = this.props;
+    let activeProps: StreamProps | undefined;
+    const otherProps: StreamProps[] = [];
     forEach(this.props.streams, (userStreams, userId) => {
-      const localUser = userId === ME
+      const localUser = userId === ME;
       userStreams.streams.forEach((stream, i) => {
-        const key = userStreams.userId + '_' + i
-        const isActive = active === key
+        const key = userStreams.userId + '_' + i;
+        const isActive = active === key;
         const props: StreamProps = {
           active: isActive,
           key,
@@ -44,18 +44,18 @@ export default class Videos extends React.PureComponent<VideosProps> {
           mirrored: localUser && stream.type === 'camera',
           muted: localUser,
           localUser,
-        }
+        };
         if (isActive) {
-          activeProps = props
+          activeProps = props;
         } else {
-          otherProps.push(props)
+          otherProps.push(props);
         }
-      })
-    })
-    return { activeProps, otherProps }
+      });
+    });
+    return { activeProps, otherProps };
   }
   render() {
-    const { activeProps, otherProps } = this.getStreams()
+    const { activeProps, otherProps } = this.getStreams();
 
     const activeVideo = activeProps && (
       <Video
@@ -67,7 +67,7 @@ export default class Videos extends React.PureComponent<VideosProps> {
         nickname={HumanService.getUserNickname(this.props.nicknames, activeProps.userId)}
         onChangeNickname={this.props.onChangeNickname}
       />
-    )
+    );
 
     const otherVideos = (
       <div className="videos" key="videos">
@@ -83,7 +83,7 @@ export default class Videos extends React.PureComponent<VideosProps> {
           />
         ))}
       </div>
-    )
-    return [activeVideo, otherVideos]
+    );
+    return [activeVideo, otherVideos];
   }
 }
