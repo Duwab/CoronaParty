@@ -59,9 +59,9 @@ export const GAME_APPLY_COMMAND_ACTION = 'GAME_APPLY_COMMAND_ACTION';
 
 export const GAME_CODES = {
   KARAOKE: 'karaoke',
-  KEYBOARD: 'karaoke',
-  DEBUG: 'karaoke',
-  NONE: 'karaoke',
+  KEYBOARD: 'keyboard',
+  DEBUG: 'debug',
+  NONE: 'none',
 };
 
 export const GAME_SELECTED_DEFAULT = GAME_CODES.KARAOKE;

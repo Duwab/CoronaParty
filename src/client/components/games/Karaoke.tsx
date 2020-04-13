@@ -43,6 +43,17 @@ const KARAOKE_COMMANDS = {
   TRACK_SELECT: 'track-select',
 };
 
+const TRACKS = [
+  {
+    name: 'Gilbert',
+    url: '/res/gilber-montagne-les-sunlights-des-tropiques.mp4',
+  },
+  {
+    name: 'Un truc Youtube',
+    url: 'https://www.youtube.com/watch?v=ysz5S6PUM-U',
+  },
+];
+
 const c = connect(mapStateToProps, mapDispatchToProps);
 
 class GameZone extends React.PureComponent<GameKaraokeProps, GameKaraokeState> {
@@ -50,7 +61,7 @@ class GameZone extends React.PureComponent<GameKaraokeProps, GameKaraokeState> {
   playerRef: RefObject<ReactPlayer> = React.createRef<ReactPlayer>();
   progress?: number;
   duration?: number;
-  url = '/res/gilber-montagne-les-sunlights-des-tropiques.mp4';
+  url = TRACKS[0].url;
   interval = setInterval(() => this.pushMyProgress(), 2000);
 
   constructor(props: GameKaraokeProps) {
@@ -93,7 +104,7 @@ class GameZone extends React.PureComponent<GameKaraokeProps, GameKaraokeState> {
   }
 
   clickChangeTrack() {
-    this.pushCommand(KARAOKE_COMMANDS.TRACK_SELECT, 'https://www.youtube.com/watch?v=ysz5S6PUM-U');
+    this.pushCommand(KARAOKE_COMMANDS.TRACK_SELECT, TRACKS[1].url);
   }
 
   pushMyProgress() {
