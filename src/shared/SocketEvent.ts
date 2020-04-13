@@ -11,6 +11,16 @@ export interface Ready {
   userId: string
 }
 
+export type GameEventType = {
+  userId: string
+  humanId: string
+  gameCode: string
+  roomName: string
+  type: string
+  action: string
+  body?: any
+}
+
 export interface SocketEvent {
   users: {
     initiator: string
@@ -23,16 +33,13 @@ export interface SocketEvent {
   }
   connect: undefined
   disconnect: undefined
-  ready: Ready,
+  ready: Ready
   'game:select': {
     userId: string
     roomName: string
     gameCode: string
   }
-  'game:event': {
-    gameCode: string
-    payload: any
-  }
+  'game:event': GameEventType
 }
 
 export type ServerSocket =

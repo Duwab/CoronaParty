@@ -39,6 +39,11 @@ export default function handleSocket(
 
   socket.on('game:event', async payload => {
     console.log('on game event', payload);
+    const room = payload.roomName;
+    console.log('select this game', payload, 'for room', room);
+    if(room) {
+      io.to(room).emit('game:event', payload);
+    }
   });
 
   socket.on('signal', async payload => {

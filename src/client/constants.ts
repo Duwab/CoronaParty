@@ -51,13 +51,23 @@ interface GameSelectOption {
   value: string
   label: string
 }
-export const GAME_SELECT_ACTION = 'GAME_SELECT_ACTION';
 export const GAME_SELECT_ACTION_REQUEST = 'GAME_SELECT_ACTION_REQUEST';
 export const GAME_SELECT_ACTION_CASCADE = 'GAME_SELECT_ACTION_CASCADE';
-export const GAME_SELECTED_DEFAULT = 'debug';
+export const GAME_PUSH_COMMAND_ACTION = 'GAME_PUSH_COMMAND_ACTION';
+export const GAME_PUSH_STATUS_ACTION = 'GAME_PUSH_STATUS_ACTION';
+export const GAME_APPLY_COMMAND_ACTION = 'GAME_APPLY_COMMAND_ACTION';
+
+export const GAME_CODES = {
+  KARAOKE: 'karaoke',
+  KEYBOARD: 'karaoke',
+  DEBUG: 'karaoke',
+  NONE: 'karaoke',
+};
+
+export const GAME_SELECTED_DEFAULT = GAME_CODES.KARAOKE;
 export const GAMES_AVAILABLE_OPTIONS: GameSelectOption[] = [
-  {value: 'karaoke', label: 'Karaoke'},
-  {value: 'keyboard', label: 'Keyboard'},
-  {value: 'debug', label: 'Debug'},
-  {value: 'none', label: 'None'},
+  {value: GAME_CODES.KARAOKE, label: 'Karaoke'},
+  {value: GAME_CODES.KEYBOARD, label: 'Keyboard'},
+  {value: GAME_CODES.DEBUG, label: 'Debug'},
+  {value: GAME_CODES.NONE, label: 'None'},
 ];

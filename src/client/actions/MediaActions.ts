@@ -101,9 +101,12 @@ export function setAudioConstraint(
 }
 
 export const play = makeAction('MEDIA_PLAY', async () => {
+  type videoFilterFn = (v: Element) => v is HTMLVideoElement;
+
   const promises = Array
-  .from(document.querySelectorAll('video'))
-  .filter(video => video.paused)
+  .from(document.querySelectorAll('video.peer-video'))
+  .filter((video => video instanceof HTMLVideoElement) as videoFilterFn)
+  .filter((video: HTMLVideoElement) => video.paused)
   .map(video => video.play());
   await Promise.all(promises);
 });

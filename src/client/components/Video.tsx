@@ -79,6 +79,7 @@ export default class Video extends React.PureComponent<VideoProps> {
       <div className={className}>
         <video
           id={`video-${userId}`}
+          className={classnames('peer-video')}
           autoPlay
           onClick={this.handleClick}
           onMouseDown={this.handleMouseDown}
