@@ -2,12 +2,12 @@ import Input from './Input';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
-import { Message } from '../actions/PeerActions';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
 
 describe('components/Input', () => {
 
   let node: Element;
-  let sendMessage: jest.MockedFunction<(message: Message) => void>;
+  let sendMessage: jest.MockedFunction<(message: RtcMessage) => void>;
   async function render () {
     sendMessage = jest.fn();
     const div = document.createElement('div');

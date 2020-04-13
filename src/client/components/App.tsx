@@ -5,7 +5,7 @@ import React from 'react';
 import Peer from 'simple-peer';
 import { Message } from '../actions/ChatActions';
 import { dismissNotification, Notification } from '../actions/NotifyActions';
-import { Message as MessageType } from '../actions/PeerActions';
+import { RtcMessage as MessageType } from '../networking/connections/rtc/interfaces/message.interface';
 import { removeStream } from '../actions/StreamActions';
 import { refreshPeersDispatch } from '../actions/SocketActions';
 import * as constants from '../constants';

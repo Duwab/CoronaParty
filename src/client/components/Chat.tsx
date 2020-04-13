@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import { Message as ChatMessage } from '../actions/ChatActions';
-import { Message } from '../actions/PeerActions';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
 import { Nicknames } from '../reducers/nicknames';
 import Input from './Input';
 import { ME } from '../constants';
@@ -28,7 +28,7 @@ export interface ChatProps {
   messages: ChatMessage[]
   nicknames: Nicknames
   onClose: () => void
-  sendMessage: (message: Message) => void
+  sendMessage: (message: RtcMessage) => void
 }
 
 export default class Chat extends React.PureComponent<ChatProps> {

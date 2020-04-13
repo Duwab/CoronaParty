@@ -2,6 +2,7 @@ jest.mock('../window');
 jest.mock('simple-peer');
 
 import * as PeerActions from './PeerActions';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
 import Peer from 'simple-peer';
 import { EventEmitter } from 'events';
 import { createStore, Store, GetState } from '../store';
@@ -205,7 +206,7 @@ describe('PeerActions', () => {
 
   describe('receive message (handleData)', () => {
     let peer: Peer.Instance;
-    function emitData(message: PeerActions.Message) {
+    function emitData(message: RtcMessage) {
       peer.emit(PEER_EVENT_DATA, JSON.stringify(message));
     }
     beforeEach(() => {

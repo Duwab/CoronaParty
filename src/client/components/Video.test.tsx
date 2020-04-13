@@ -1,3 +1,5 @@
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
+
 jest.mock('../window');
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -6,7 +8,6 @@ import Video, { VideoProps } from './Video';
 import { MediaStream } from '../window';
 import { STREAM_TYPE_CAMERA } from '../constants';
 import { StreamWithURL } from '../reducers/streams';
-import { NicknameMessage } from '../actions/PeerActions';
 
 describe('components/Video', () => {
 

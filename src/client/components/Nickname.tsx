@@ -1,5 +1,5 @@
 import React from 'react';
-import { NicknameMessage } from '../actions/PeerActions';
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
 
 export interface NicknameProps {
   value: string

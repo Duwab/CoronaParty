@@ -5,7 +5,7 @@ import { ME } from '../constants';
 import HumanService from '../networking/identity/human';
 import Video from './Video';
 import { Nicknames } from '../reducers/nicknames';
-import { NicknameMessage } from '../actions/PeerActions';
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
 
 export interface VideosProps {
   active: string | null

@@ -1,8 +1,8 @@
 import { Nickname } from './Nickname';
-import { NicknameMessage } from '../actions/PeerActions';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
 
 describe('Nickname', () => {
 

@@ -1,8 +1,8 @@
 import React, { ReactEventHandler, ChangeEventHandler, KeyboardEventHandler, MouseEventHandler } from 'react';
-import { Message } from '../actions/PeerActions';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
 
 export interface InputProps {
-  sendMessage: (message: Message) => void
+  sendMessage: (message: RtcMessage) => void
 }
 
 export interface InputState {
