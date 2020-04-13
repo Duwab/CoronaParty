@@ -18,6 +18,9 @@ export default function nicknames(
     case PEER_REMOVE:
       return omit(state, [action.payload.userId]);
     case NICKNAME_SET:
+      if(action.payload.userId === ME) {
+        HumanService.setCurrentUserNickname(action.payload.nickname);
+      }
       return {
         ...state,
         [action.payload.userId]: action.payload.nickname,

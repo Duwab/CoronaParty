@@ -16,6 +16,13 @@ export default {
 
     return localStorage && localStorage.nickname;
   },
+  setCurrentUserNickname(newNickname: string) {
+    if (localStorage) {
+      localStorage.nickname = newNickname;
+    }
+
+    return localStorage && localStorage.nickname;
+  },
   getUserNickname(nicknames: Nicknames, userId: string): string {
     const nickname = nicknames[userId];
     if (nickname) {

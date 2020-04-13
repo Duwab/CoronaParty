@@ -6,13 +6,16 @@ import { State } from '../store';
 import { Alerts, Alert } from './Alerts';
 import { info, warning, error } from '../actions/NotifyActions';
 import { ME, STREAM_TYPE_CAMERA } from '../constants';
+import { setNickname } from '../actions/NicknameActions';
 
 export type MediaProps = MediaState & {
   visible: boolean
   enumerateDevices: typeof enumerateDevices
   onSetVideoConstraint: typeof setVideoConstraint
   onSetAudioConstraint: typeof setAudioConstraint
+  onNickname: typeof setNickname
   getMediaStream: typeof getMediaStream
+  nickname?: string
   play: typeof play
   logInfo: typeof info
   logWarning: typeof warning
@@ -24,8 +27,10 @@ function mapStateToProps(state: State) {
   const hidden = !!localStream &&
     localStream.streams.filter(s => s.type === STREAM_TYPE_CAMERA).length > 0;
   const visible = !hidden;
+  const nickname = state.nicknames[ME];
   return {
     ...state.media,
+    nickname,
     visible,
   };
 }
@@ -34,6 +39,7 @@ const mapDispatchToProps = {
   enumerateDevices,
   onSetVideoConstraint: setVideoConstraint,
   onSetAudioConstraint: setAudioConstraint,
+  onNickname: setNickname,
   getMediaStream,
   play,
   logInfo: info,
@@ -74,8 +80,17 @@ export const MediaForm = React.memo(function MediaForm(props: MediaProps) {
     props.onSetAudioConstraint(constraint);
   }
 
+  function onNicknameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log('change nickname', event.target.value);
+    props.onNickname({
+      nickname: event.target.value,
+      userId: ME,
+    });
+  }
+
   const videoId = JSON.stringify(props.video);
   const audioId = JSON.stringify(props.audio);
+  const nickname = props.nickname;
 
   return (
     <form className='media' onSubmit={onSave}>
@@ -102,6 +117,17 @@ export const MediaForm = React.memo(function MediaForm(props: MediaProps) {
           type='audioinput'
         />
       </select>
+
+      <div>
+        <label htmlFor='nickname'>
+          Nickname :
+        </label>
+        <input
+          name='nickname'
+          onChange={onNicknameChange}
+          value={nickname}
+        />
+      </div>
 
       <button type='submit'>
         Join Call
