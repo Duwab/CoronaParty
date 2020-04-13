@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React, { RefObject } from 'react';
 import { connect } from 'react-redux';
 import { State } from '../store';
-import { ME, STREAM_TYPE_CAMERA, GAMES_AVAILABLE_OPTIONS } from '../constants';
+import { GAMES_AVAILABLE_OPTIONS } from '../constants';
 import Karaoke from './games/Karaoke';
 import Example from './games/Example';
 import Select from 'react-select';
@@ -25,9 +25,7 @@ export interface GameZoneState {
 }
 
 function mapStateToProps(state: State): GameZoneStateProps {
-  const localStream = state.streams[ME];
-  const visible = !!localStream &&
-    localStream.streams.filter(s => s.type === STREAM_TYPE_CAMERA).length > 0;
+  const visible = state.layout.widgets.game;
   return {
     media: state.media,
     visible,

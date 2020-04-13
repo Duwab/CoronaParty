@@ -5,10 +5,12 @@ import { MediaState } from '../reducers/media';
 import { State } from '../store';
 import { Alerts, Alert } from './Alerts';
 import { info, warning, error } from '../actions/NotifyActions';
-import { ME, STREAM_TYPE_CAMERA } from '../constants';
+import { ME, LAYOUT_MODES } from '../constants';
 import { setNickname } from '../actions/NicknameActions';
+import { changeLayout } from '../actions/LayoutActions';
 
 export type MediaProps = MediaState & {
+  changeLayout: typeof changeLayout
   visible: boolean
   enumerateDevices: typeof enumerateDevices
   onSetVideoConstraint: typeof setVideoConstraint
@@ -23,10 +25,7 @@ export type MediaProps = MediaState & {
 }
 
 function mapStateToProps(state: State) {
-  const localStream = state.streams[ME];
-  const hidden = !!localStream &&
-    localStream.streams.filter(s => s.type === STREAM_TYPE_CAMERA).length > 0;
-  const visible = !hidden;
+  const visible = state.layout.widgets.join;
   const nickname = state.nicknames[ME];
   return {
     ...state.media,
@@ -36,6 +35,7 @@ function mapStateToProps(state: State) {
 }
 
 const mapDispatchToProps = {
+  changeLayout,
   enumerateDevices,
   onSetVideoConstraint: setVideoConstraint,
   onSetAudioConstraint: setAudioConstraint,
@@ -50,9 +50,6 @@ const mapDispatchToProps = {
 const c = connect(mapStateToProps, mapDispatchToProps);
 
 export const MediaForm = React.memo(function MediaForm(props: MediaProps) {
-  if (!props.visible) {
-    return null;
-  }
 
   React.useMemo(async () => await props.enumerateDevices(), []);
 
@@ -65,6 +62,7 @@ export const MediaForm = React.memo(function MediaForm(props: MediaProps) {
     const { audio, video } = props;
     try {
       await props.getMediaStream({ audio, video });
+      props.changeLayout(LAYOUT_MODES.DEFAULT);
     } catch (err) {
       props.logError('Error: {0}', err);
     }
@@ -156,6 +154,10 @@ export const AutoplayMessage = React.memo(
 );
 
 export const Media = c(React.memo(function Media(props: MediaProps) {
+  if (!props.visible) {
+    return null;
+  }
+
   return (
     <div className='media-container'>
       <Alerts>

@@ -7,9 +7,12 @@ import { toggleActive, removeStream } from '../actions/StreamActions';
 import App from '../components/App';
 import { State } from '../store';
 import { refreshPeersDispatch } from '../actions/SocketActions';
+import { changeLayout } from '../actions/LayoutActions';
 
 function mapStateToProps (state: State) {
   return {
+    layoutMode: state.layout.mode,
+    layoutWidgets: state.layout.widgets,
     streams: state.streams,
     peers: state.peers,
     notifications: state.notifications,
@@ -21,6 +24,7 @@ function mapStateToProps (state: State) {
 }
 
 const mapDispatchToProps = {
+  changeLayout,
   toggleActive,
   sendMessage,
   dismissNotification,

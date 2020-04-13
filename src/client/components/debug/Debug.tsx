@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { State } from '../../store';
 import { baseUrl, callId, userId, iceServers } from '../../window';
 import { ME } from '../../constants';
-import Peer from 'simple-peer';
 import { StreamWithURL } from '../../reducers/streams';
 
 export interface DebugProps {

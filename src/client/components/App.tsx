@@ -19,12 +19,17 @@ import Videos from './Videos';
 import { getDesktopStream } from '../actions/MediaActions';
 import { StreamsState } from '../reducers/streams';
 import { Nicknames } from '../reducers/nicknames';
+import { LAYOUT_MODES } from '../constants';
+import { changeLayout } from '../actions/LayoutActions';
 
 export interface AppProps {
   active: string | null
   dismissNotification: typeof dismissNotification
   init: () => void
   nicknames: Nicknames
+  layoutMode: string
+  layoutWidgets: Record<string, boolean>
+  changeLayout: typeof changeLayout
   notifications: Record<string, Notification>
   messages: Message[]
   messagesCount: number
@@ -47,6 +52,8 @@ export default class App extends React.PureComponent<AppProps, AppState> {
   state: AppState = {
     chatVisible: false,
   }
+
+  // TODO : handle chat display using layout store
   handleShowChat = () => {
     this.setState({
       chatVisible: true,
@@ -62,24 +69,29 @@ export default class App extends React.PureComponent<AppProps, AppState> {
       ? this.handleHideChat()
       : this.handleShowChat();
   }
-  componentDidMount () {
-    const { init } = this.props;
+
+  componentDidMount() {
+    const {init} = this.props;
     init();
   }
+
   onHangup = () => {
     const localStreams = this.getLocalStreams();
     forEach(localStreams, s => {
       this.props.removeStream(constants.ME, s.stream);
-      // this.props.refreshPeersDispatch();
+      this.props.changeLayout(LAYOUT_MODES.SETUP);
     });
   };
+
   getLocalStreams() {
     const ls = this.props.streams[constants.ME];
     return ls ? keyBy(ls.streams, 'type') : {};
   }
-  render () {
+
+  render() {
     const {
       dismissNotification,
+      layoutWidgets,
       notifications,
       nicknames,
       messages,
@@ -93,31 +105,35 @@ export default class App extends React.PureComponent<AppProps, AppState> {
     });
 
     const localStreams = this.getLocalStreams();
+    console.log('app render', `${JSON.stringify(layoutWidgets)}`);
 
     return (
       <div className="app">
 
-        <GameZone />
+        <GameZone/>
 
-        <Side align='flex-end' left zIndex={2}>
-          <Toolbar
-            chatVisible={this.state.chatVisible}
-            messagesCount={messagesCount}
-            onToggleChat={this.handleToggleChat}
-            onSendFile={onSendFile}
-            onHangup={this.onHangup}
-            stream={localStreams[constants.STREAM_TYPE_CAMERA]}
-            desktopStream={localStreams[constants.STREAM_TYPE_DESKTOP]}
-            onGetDesktopStream={this.props.getDesktopStream}
-            onRemoveStream={this.props.removeStream}
-          />
-        </Side>
+        {
+          layoutWidgets.sidebar &&
+          <Side align='flex-end' left zIndex={2}>
+            <Toolbar
+              chatVisible={this.state.chatVisible}
+              messagesCount={messagesCount}
+              onToggleChat={this.handleToggleChat}
+              onSendFile={onSendFile}
+              onHangup={this.onHangup}
+              stream={localStreams[constants.STREAM_TYPE_CAMERA]}
+              desktopStream={localStreams[constants.STREAM_TYPE_DESKTOP]}
+              onGetDesktopStream={this.props.getDesktopStream}
+              onRemoveStream={this.props.removeStream}
+            />
+          </Side>
+        }
         <Side className={chatVisibleClassName} top zIndex={1}>
           <Notifications
             dismiss={dismissNotification}
             notifications={notifications}
           />
-          <Media />
+          <Media/>
         </Side>
         <Chat
           messages={messages}
