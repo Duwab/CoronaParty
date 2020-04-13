@@ -2,7 +2,7 @@ jest.mock('../window');
 jest.mock('simple-peer');
 
 import * as PeerActions from './PeerActions';
-import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
 import Peer from 'simple-peer';
 import { EventEmitter } from 'events';
 import { createStore, Store, GetState } from '../store';

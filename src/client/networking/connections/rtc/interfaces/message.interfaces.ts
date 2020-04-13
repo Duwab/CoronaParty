@@ -1,4 +1,4 @@
-import { Base64File } from './file.interface';
+import { Base64File } from './file.interfaces';
 
 export interface TextMessage {
   type: 'text'
@@ -17,4 +17,11 @@ export interface NicknameMessage {
   }
 }
 
-export type RtcMessage = TextMessage | FileMessage | NicknameMessage
+export interface HumanMessage {
+  type: 'human'
+  payload: {
+    humanId: string
+  }
+}
+
+export type RtcMessage = TextMessage | FileMessage | NicknameMessage | HumanMessage

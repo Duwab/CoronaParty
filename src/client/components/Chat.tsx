@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import { Message as ChatMessage } from '../actions/ChatActions';
-import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
 import { Nicknames } from '../reducers/nicknames';
 import Input from './Input';
 import { ME } from '../constants';

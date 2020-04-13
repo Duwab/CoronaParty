@@ -2,7 +2,7 @@ import React, { ReactEventHandler } from 'react';
 import classnames from 'classnames';
 import { StreamWithURL } from '../reducers/streams';
 import { Nickname } from './Nickname';
-import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
 
 export interface VideoProps {
   // videos: Record<string, unknown>

@@ -10,14 +10,10 @@ import { Dispatch, GetState } from '../store';
 import { ClientSocket } from '../socket';
 import { PeerHandler } from '../networking/connections/rtc/PeerHandler';
 import { sendDataToPeer } from '../networking/connections/rtc/sendDataToPeer';
-import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
-import { Base64File } from '../networking/connections/rtc/interfaces/file.interface';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
+import { Base64File } from '../networking/connections/rtc/interfaces/file.interfaces';
 
 const debug = _debug('peercalls');
-
-export interface Peers {
-  [id: string]: Peer.Instance
-}
 
 export interface CreatePeerOptions {
   socket: ClientSocket
@@ -145,6 +141,9 @@ export const sendMessage = (message: RtcMessage) =>
       }));
       window.localStorage &&
         (window.localStorage.nickname = message.payload.nickname);
+      break;
+    case 'human':
+      // do nothing here
       break;
     default:
       dispatch(ChatActions.addMessage({

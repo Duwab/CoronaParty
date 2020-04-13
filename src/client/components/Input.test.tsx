@@ -2,7 +2,7 @@ import Input from './Input';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
-import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interface';
+import { RtcMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
 
 describe('components/Input', () => {
 

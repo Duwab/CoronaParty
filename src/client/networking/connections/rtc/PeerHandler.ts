@@ -7,6 +7,7 @@ import * as StreamActions from '../../../actions/StreamActions';
 import * as ChatActions from '../../../actions/ChatActions';
 import HumanService from '../../identity/human';
 import * as NicknameActions from '../../../actions/NicknameActions';
+import * as HumanActions from '../../../actions/HumanActions';
 import { removePeer } from '../../../actions/PeerActions';
 import _debug from 'debug';
 import { sendDataToPeer } from './sendDataToPeer';
@@ -73,6 +74,12 @@ export class PeerHandler {
         type: 'nickname',
       });
     }
+
+    const humanId = HumanService.getCurrentHumanId();
+    sendDataToPeer(peer, {
+      payload: {humanId},
+      type: 'human',
+    });
   };
 
   handleTrack = (track: MediaStreamTrack, stream: MediaStream) => {
@@ -130,6 +137,12 @@ export class PeerHandler {
         dispatch(NicknameActions.setNickname({
           userId: user.id,
           nickname: message.payload.nickname,
+        }));
+        break;
+      case 'human':
+        dispatch(HumanActions.bindHumanWindow({
+          windowId: user.id,
+          humanId: message.payload.humanId,
         }));
         break;
       default:

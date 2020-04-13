@@ -2,7 +2,7 @@ import { Nickname } from './Nickname';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
-import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
 
 describe('Nickname', () => {
 

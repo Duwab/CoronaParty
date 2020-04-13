@@ -1,5 +1,5 @@
 import React from 'react';
-import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
 
 export interface NicknameProps {
   value: string

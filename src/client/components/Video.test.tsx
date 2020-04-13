@@ -1,4 +1,4 @@
-import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interface';
+import { NicknameMessage } from '../networking/connections/rtc/interfaces/message.interfaces';
 
 jest.mock('../window');
 import React from 'react';
