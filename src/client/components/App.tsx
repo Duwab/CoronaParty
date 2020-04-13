@@ -11,7 +11,7 @@ import { refreshPeersDispatch } from '../actions/SocketActions';
 import * as constants from '../constants';
 import Chat from './Chat';
 import GameZone from './GameZone';
-import { Media } from './Media';
+import { Join } from './Join';
 import Notifications from './Notifications';
 import { Side } from './Side';
 import Toolbar from './Toolbar';
@@ -133,7 +133,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
             dismiss={dismissNotification}
             notifications={notifications}
           />
-          <Media/>
+          <Join/>
         </Side>
         <Chat
           messages={messages}

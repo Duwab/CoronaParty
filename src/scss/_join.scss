@@ -1,0 +1,84 @@
+.media-container {
+  background: $color-virus;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+
+  h2 {
+    margin: 5rem auto 2rem;
+  }
+
+  form.media {
+    margin: auto;
+    max-width: 450px;
+    text-align: center;
+
+    & > * {
+      & + * {
+        margin-top: 1rem;
+      }
+      @media(max-width: 650px) {
+        display: block;
+        width: 100%;
+      }
+      @media(min-width: 651px) {
+        & + * {
+          margin-left: 1rem;
+        }
+      }
+
+    }
+
+    select {
+      padding: 15px 10px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;       /* Remove default arrow */
+      border: none;
+      border-radius: 4px;
+      border-bottom: 2px solid darken(#fff, 10%);
+      text-align: center;
+      color: black;
+      background-color: white;
+      cursor: pointer;
+      &:hover {
+        background-color: darken(white, 5%);
+      }
+      &:active {
+        background-color: darken(white, 10%);
+      }
+    }
+
+    label {
+      color: #CCC;
+      padding: 15px 10px;
+    }
+
+    input {
+      padding: 15px 10px;
+      border: none;
+      border-radius: 4px;
+      border-bottom: 2px solid darken(#fff, 10%);
+      color: black;
+      background-color: white;
+      &:hover {
+        background-color: darken(white, 5%);
+      }
+      &:active {
+        background-color: darken(white, 10%);
+      }
+    }
+
+    select, input, button {
+      font-size: 1.2rem;
+    }
+
+    button {
+      @include button($color-primary, $color-warning);
+      padding: 1rem;
+    }
+  }
+}

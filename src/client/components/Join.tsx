@@ -153,13 +153,14 @@ export const AutoplayMessage = React.memo(
   },
 );
 
-export const Media = c(React.memo(function Media(props: MediaProps) {
+export const Join = c(React.memo(function Media(props: MediaProps) {
   if (!props.visible) {
     return null;
   }
 
   return (
     <div className='media-container'>
+      <h2>Welcome to the party!</h2>
       <Alerts>
         {props.autoplayError && (
           <Alert>

@@ -1,4 +1,5 @@
-$font-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-sans-serif: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+//$font-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-monospace: Menlo, Monaco, Consolas, "Ubuntu Mono", monospace;
 
 $color-bg: #086788;
@@ -8,6 +9,7 @@ $icon-size: 48px;
 $color-virus: #08876f;
 
 $color-primary: white;
+$color-dark: #333;
 $color-info: #31EF40;
 $color-warning: #F0C808;
 $color-error: #EE7600;

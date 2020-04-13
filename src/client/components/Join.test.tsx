@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import { createStore, Store } from '../store';
-import { Media } from './Media';
+import { Join } from './Join';
 import { MEDIA_ENUMERATE } from '../constants';
 
 describe('Media', () => {
@@ -34,7 +34,7 @@ describe('Media', () => {
       ReactDOM.render(
         <div ref={div => resolve(div!)}>
           <Provider store={store}>
-            <Media />
+            <Join />
           </Provider>
         </div>,
         div,
